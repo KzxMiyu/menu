@@ -1097,7 +1097,7 @@ function UpdateFlowerChams()
                             v48.TextColor3 = Color3.fromRGB(255, 0, 0)
                             if l_v45_0.Name == "Flower1" then
                                 v48.Text = "Blue Flower" .. " \n" .. v26((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v45_0.Position).Magnitude / 3) .. " Distance"
-                                v48.TextColor3 = Color3.fromRGB(0, 0, 255)
+                                v48.TextColor3 = Color3.fromRGB(178, 97, 255)
                             end
                             if l_v45_0.Name == "Flower2" then
                                 v48.Text = "Red Flower" .. " \n" .. v26((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v45_0.Position).Magnitude / 3) .. " Distance"
@@ -1318,7 +1318,7 @@ function UpdatePlayerChams()
                     hpLabel.Text = "[" .. math.floor(hum.Health) .. "/" .. math.floor(hum.MaxHealth) .. "]"
 
                     if player.Team == LocalPlayer.Team then
-                        nameLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
+                        nameLabel.TextColor3 = Color3.fromRGB(202, 174, 214)
                     else
                         nameLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
                     end
@@ -1393,7 +1393,7 @@ function UpdateDevilChams()
                         text.BackgroundTransparency = 1
                         text.TextScaled = true
                         text.Font = Enum.Font.GothamBold
-                        text.TextColor3 = Color3.fromRGB(120, 0, 0) -- vermelho escuro
+                        text.TextColor3 = Color3.fromRGB(217, 181, 244) -- vermelho escuro
                         text.TextStrokeTransparency = 0
                         text.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
                         text.Parent = bill
@@ -1440,7 +1440,7 @@ function UpdateFlowerChams()
                         v92.TextColor3 = Color3.fromRGB(255, 0, 0)
                         if l_v89_0.Name == "Flower1" then
                             v92.Text = "Blue Flower" .. " \n" .. v70((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v89_0.Position).Magnitude / 3) .. " Distance"
-                            v92.TextColor3 = Color3.fromRGB(0, 0, 255)
+                            v92.TextColor3 = Color3.fromRGB(0, 213, 255)
                         end
                         if l_v89_0.Name == "Flower2" then
                             v92.Text = "Red Flower" .. " \n" .. v70((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v89_0.Position).Magnitude / 3) .. " Distance"
@@ -1722,7 +1722,7 @@ function UpdateFlowerChams()
                             v136.TextColor3 = Color3.fromRGB(255, 0, 0)
                             if l_v133_0.Name == "Flower1" then
                                 v136.Text = "Blue Flower" .. " \n" .. v114((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v133_0.Position).Magnitude / 3) .. " Distance"
-                                v136.TextColor3 = Color3.fromRGB(0, 0, 255)
+                                v136.TextColor3 = Color3.fromRGB(248, 196, 85)
                             end
                             if l_v133_0.Name == "Flower2" then
                                 v136.Text = "Red Flower" .. " \n" .. v114((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v133_0.Position).Magnitude / 3) .. " Distance"
@@ -1897,7 +1897,7 @@ function UpdatePlayerChams()
                         v163.BackgroundTransparency = 1
                         v163.TextStrokeTransparency = 0.5
                         if l_v160_0.Team == game.Players.LocalPlayer.Team then
-                            v163.TextColor3 = Color3.new(0, 255, 0)
+                            v163.TextColor3 = Color3.new(216, 162, 184)
                         else
                             v163.TextColor3 = Color3.new(255, 0, 0)
                         end
@@ -2010,7 +2010,7 @@ function UpdateFlowerChams()
                         v180.TextColor3 = Color3.fromRGB(255, 0, 0)
                         if l_v177_0.Name == "Flower1" then
                             v180.Text = "Blue Flower" .. " \n" .. v158((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v177_0.Position).Magnitude / 3) .. " Distance"
-                            v180.TextColor3 = Color3.fromRGB(0, 0, 255)
+                            v180.TextColor3 = Color3.fromRGB(191, 232, 140)
                         end
                         if l_v177_0.Name == "Flower2" then
                             v180.Text = "Red Flower" .. " \n" .. v158((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v177_0.Position).Magnitude / 3) .. " Distance"
