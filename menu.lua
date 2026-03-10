@@ -3738,13 +3738,13 @@ function CheckItemBPCRBPCR(v463)
 end
 local vu32 = loadstring(game:HttpGet("https://raw.githubusercontent.com/PlockScripts/Library-ui/refs/heads/main/redz-V5-remake/main.luau"))()
 local v466 = vu32:MakeWindow({
-    Title = "redz hub [ SKIDDED VERSION BY ZERO ] : Blox Fruits",
-    SubTitle = "skidded version",
-    SaveFolder = "Redz | redz lib v5.lua"
+    Title = "Miyu [ Miyu Version by Hai1110# ] : Blox Fruits",
+    SubTitle = "Miyu version 1.0",
+    SaveFolder = "Miyu | Miyu lib v1.lua"
 })
 
 v466:AddMinimizeButton({
-    Button = { Image = "rbxassetid://15298567397", BackgroundTransparency = 0 },
+    Button = { Image = "rbxassetid://96179046857812", BackgroundTransparency = 0 },
     Size = UDim2.new(0, 35, 0, 35),
     Corner = { CornerRadius = UDim.new(0.25, 0) },
 })
@@ -3762,10 +3762,10 @@ local v494 = v466:MakeTab({"Visual", "user"})
 local v495 = v466:MakeTab({"Shop", "shoppingCart"})
 local v496 = v466:MakeTab({"Misc", "settings"})
 v484:AddDiscordInvite({
-    Name = "DesplockHub | Community",
-    Description = "Join server to receive Update",
-    Logo = "rbxassetid://131723242350068",
-    Invite = "https://discord.gg/BnEDf68jwx"
+    Name = "Sever discord của Miyu",
+    Description = "Máy chủ thông báo cập nhật",
+    Logo = "rbxassetid://96179046857812",
+    Invite = "https://discord.gg/hientaichuaco"
 })
 _G.SelectWeapon = "Melee"
 task.spawn(function()
