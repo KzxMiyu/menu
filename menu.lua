@@ -2542,7 +2542,7 @@ function UpdateDevilChams()
                         v263.TextYAlignment = "Top"
                         v263.BackgroundTransparency = 1
                         v263.TextStrokeTransparency = 0.5
-                        v263.TextColor3 = Color3.fromRGB(255, 255, 255)
+                        v263.TextColor3 = Color3.fromRGB(251, 134, 163)
                         v263.Text = l_v260_0.Name .. " \n" .. v246((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v260_0.Handle.Position).Magnitude / 3) .. " Distance"
                     end
                 end
@@ -2574,14 +2574,14 @@ function UpdateFlowerChams()
                             v268.TextYAlignment = "Top"
                             v268.BackgroundTransparency = 1
                             v268.TextStrokeTransparency = 0.5
-                            v268.TextColor3 = Color3.fromRGB(255, 0, 0)
+                            v268.TextColor3 = Color3.fromRGB(196, 169, 38)
                             if l_v265_0.Name == "Flower1" then
                                 v268.Text = "Blue Flower" .. " \n" .. v246((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v265_0.Position).Magnitude / 3) .. " Distance"
-                                v268.TextColor3 = Color3.fromRGB(0, 0, 255)
+                                v268.TextColor3 = Color3.fromRGB(174, 209, 150)
                             end
                             if l_v265_0.Name == "Flower2" then
                                 v268.Text = "Red Flower" .. " \n" .. v246((game:GetService("Players").LocalPlayer.Character.Head.Position - l_v265_0.Position).Magnitude / 3) .. " Distance"
-                                v268.TextColor3 = Color3.fromRGB(255, 0, 0)
+                                v268.TextColor3 = Color3.fromRGB(196, 169, 38)
                             end
                         end
                     elseif l_v265_0:FindFirstChild("NameEsp" .. Number) then
