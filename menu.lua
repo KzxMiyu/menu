@@ -3744,7 +3744,7 @@ local v466 = vu32:MakeWindow({
 })
 
 v466:AddMinimizeButton({
-    Button = { Image = "rbxassetid://96179046857812", BackgroundTransparency = 1 },
+    Button = { Image = "rbxassetid://96179046857812", BackgroundTransparency = 20 },
     Size = UDim2.new(0, 35, 0, 35),
     Corner = { CornerRadius = UDim.new(0.25, 0) },
 })
