@@ -1,23 +1,27 @@
--- 🌸 MIYU HUB V5 VIP 🌸
+-- 🌸 MIYU HUB V7 🌸
 
 local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
 local Lighting = game:GetService("Lighting")
+local Players = game:GetService("Players")
+
+local Player = Players.LocalPlayer
+
+------------------------------------------------
+-- BLUR GLASS EFFECT
+------------------------------------------------
+
+local blur = Instance.new("BlurEffect")
+blur.Size = 20
+blur.Parent = Lighting
 
 ------------------------------------------------
 -- SCREEN GUI
 ------------------------------------------------
 
 local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Parent = Player:WaitForChild("PlayerGui")
 ScreenGui.Name = "MiyuHub"
-ScreenGui.Parent = game.CoreGui
-
-------------------------------------------------
--- BLUR EFFECT (VIP STYLE)
-------------------------------------------------
-
-local blur = Instance.new("BlurEffect")
-blur.Size = 18
-blur.Parent = Lighting
 
 ------------------------------------------------
 -- MAIN MENU
@@ -25,31 +29,41 @@ blur.Parent = Lighting
 
 local Main = Instance.new("Frame")
 Main.Parent = ScreenGui
-Main.Size = UDim2.new(0,520,0,360)
+Main.Size = UDim2.new(0,0,0,0)
 Main.Position = UDim2.new(0.5,-260,0.5,-180)
-Main.BackgroundColor3 = Color3.fromRGB(35,35,45)
-Main.BackgroundTransparency = 0.25
+Main.BackgroundColor3 = Color3.fromRGB(30,30,40)
+Main.BackgroundTransparency = 0.2
 
-local Corner = Instance.new("UICorner")
-Corner.Parent = Main
-Corner.CornerRadius = UDim.new(0,12)
+local Corner = Instance.new("UICorner",Main)
+Corner.CornerRadius = UDim.new(0,14)
 
-local Stroke = Instance.new("UIStroke")
-Stroke.Parent = Main
+------------------------------------------------
+-- NEON GLOW
+------------------------------------------------
+
+local Stroke = Instance.new("UIStroke",Main)
 Stroke.Color = Color3.fromRGB(255,120,200)
 Stroke.Thickness = 2
 
 ------------------------------------------------
--- TOP BAR
+-- OPEN ANIMATION
 ------------------------------------------------
 
-local TopBar = Instance.new("Frame")
-TopBar.Parent = Main
-TopBar.Size = UDim2.new(1,0,0,40)
+TweenService:Create(
+Main,
+TweenInfo.new(0.6,Enum.EasingStyle.Back),
+{Size = UDim2.new(0,520,0,360)}
+):Play()
+
+------------------------------------------------
+-- TOPBAR
+------------------------------------------------
+
+local TopBar = Instance.new("Frame",Main)
+TopBar.Size = UDim2.new(1,0,0,50)
 TopBar.BackgroundColor3 = Color3.fromRGB(255,120,200)
 
-local Title = Instance.new("TextLabel")
-Title.Parent = TopBar
+local Title = Instance.new("TextLabel",TopBar)
 Title.Size = UDim2.new(1,0,1,0)
 Title.Text = "🌸 Miyu Hub 🌸"
 Title.BackgroundTransparency = 1
@@ -63,86 +77,128 @@ Title.TextColor3 = Color3.new(1,1,1)
 
 local Logo = Instance.new("ImageLabel")
 Logo.Parent = Main
-Logo.Size = UDim2.new(0,80,0,80)
-Logo.Position = UDim2.new(0,10,0,50)
+Logo.Size = UDim2.new(0,70,0,70)
+Logo.Position = UDim2.new(0,10,0,60)
 Logo.BackgroundTransparency = 1
 Logo.Image = "rbxassetid://96179046857812"
 
 ------------------------------------------------
--- MOVING BACKGROUND EFFECT
+-- DRAGGABLE
 ------------------------------------------------
 
-local Bg = Instance.new("Frame")
-Bg.Parent = Main
-Bg.Size = UDim2.new(1,0,1,0)
-Bg.BackgroundTransparency = 1
+local dragging=false
+local dragStart
+local startPos
 
-local Particle = Instance.new("ParticleEmitter")
-Particle.Parent = Bg
-Particle.Texture = "rbxassetid://243660364"
-Particle.Rate = 6
-Particle.Lifetime = NumberRange.new(2)
-Particle.Speed = NumberRange.new(1)
-Particle.Color = ColorSequence.new(Color3.fromRGB(255,120,200))
-Particle.Size = NumberSequence.new(0.25)
+TopBar.InputBegan:Connect(function(input)
 
-------------------------------------------------
--- AUTO FARM BUTTON
-------------------------------------------------
+if input.UserInputType==Enum.UserInputType.MouseButton1 then
+dragging=true
+dragStart=input.Position
+startPos=Main.Position
+end
 
-local AutoFarm = false
+end)
 
-local FarmButton = Instance.new("TextButton")
-FarmButton.Parent = Main
-FarmButton.Size = UDim2.new(0,200,0,50)
-FarmButton.Position = UDim2.new(0.5,-100,0.55,0)
-FarmButton.Text = "Auto Farm"
-FarmButton.BackgroundColor3 = Color3.fromRGB(255,182,193)
-FarmButton.TextColor3 = Color3.new(1,1,1)
-FarmButton.TextScaled = true
-FarmButton.Font = Enum.Font.GothamBold
+UIS.InputChanged:Connect(function(input)
 
-FarmButton.MouseButton1Click:Connect(function()
+if dragging and input.UserInputType==Enum.UserInputType.MouseMovement then
 
-AutoFarm = not AutoFarm
+local delta=input.Position-dragStart
 
-FarmButton.Text = AutoFarm and "Auto Farm: ON" or "Auto Farm: OFF"
-
-while AutoFarm do
-task.wait()
-
--- bạn có thể thêm code farm mob ở đây
+Main.Position=UDim2.new(
+startPos.X.Scale,
+startPos.X.Offset+delta.X,
+startPos.Y.Scale,
+startPos.Y.Offset+delta.Y
+)
 
 end
 
 end)
 
 ------------------------------------------------
--- AUTO BOSS BUTTON
+-- TAB ICON SYSTEM
 ------------------------------------------------
 
-local AutoBoss = false
+local TabFrame = Instance.new("Frame",Main)
+TabFrame.Size = UDim2.new(0,120,1,-50)
+TabFrame.Position = UDim2.new(0,0,0,50)
+TabFrame.BackgroundColor3 = Color3.fromRGB(40,40,50)
 
-local BossButton = Instance.new("TextButton")
-BossButton.Parent = Main
-BossButton.Size = UDim2.new(0,200,0,50)
-BossButton.Position = UDim2.new(0.5,-100,0.75,0)
-BossButton.Text = "Auto Boss"
-BossButton.BackgroundColor3 = Color3.fromRGB(255,182,193)
-BossButton.TextColor3 = Color3.new(1,1,1)
-BossButton.TextScaled = true
-BossButton.Font = Enum.Font.GothamBold
+local Content = Instance.new("Frame",Main)
+Content.Size = UDim2.new(1,-120,1,-50)
+Content.Position = UDim2.new(0,120,0,50)
+Content.BackgroundTransparency = 1
 
-BossButton.MouseButton1Click:Connect(function()
+local function CreateTab(name,icon)
 
-AutoBoss = not AutoBoss
+local Button = Instance.new("ImageButton",TabFrame)
+Button.Size = UDim2.new(1,0,0,50)
+Button.Image = icon
+Button.BackgroundColor3 = Color3.fromRGB(255,182,193)
 
-BossButton.Text = AutoBoss and "Auto Boss: ON" or "Auto Boss: OFF"
+local Page = Instance.new("Frame",Content)
+Page.Size = UDim2.new(1,0,1,0)
+Page.Visible=false
+Page.BackgroundTransparency=1
 
-while AutoBoss do
-task.wait()
+Button.MouseButton1Click:Connect(function()
 
--- thêm code đánh boss ở đây
+for i,v in pairs(Content:GetChildren()) do
+v.Visible=false
+end
+
+Page.Visible=true
+
+end)
+
+return Page
+
+end
+
+------------------------------------------------
+-- TABS
+------------------------------------------------
+
+local Dashboard = CreateTab("Dashboard","rbxassetid://6031280882")
+local Farm = CreateTab("Farm","rbxassetid://6031260787")
+local Teleport = CreateTab("Teleport","rbxassetid://6031289442")
+local Inventory = CreateTab("Inventory","rbxassetid://6031068425")
+
+Dashboard.Visible=true
+
+------------------------------------------------
+-- DASHBOARD STATS
+------------------------------------------------
+
+local LevelStat = Instance.new("TextLabel",Dashboard)
+LevelStat.Size = UDim2.new(0,200,0,40)
+LevelStat.Position = UDim2.new(0,20,0,20)
+LevelStat.Text = "Level: Loading..."
+LevelStat.BackgroundColor3 = Color3.fromRGB(255,182,193)
+LevelStat.TextColor3 = Color3.new(1,1,1)
+LevelStat.TextScaled = true
+LevelStat.Font = Enum.Font.GothamBold
+
+local BeliStat = LevelStat:Clone()
+BeliStat.Parent = Dashboard
+BeliStat.Position = UDim2.new(0,20,0,80)
+BeliStat.Text = "Beli: Loading..."
+
+task.spawn(function()
+
+while true do
+task.wait(2)
+
+pcall(function()
+
+local data = Player.Data
+
+LevelStat.Text = "Level: "..data.Level.Value
+BeliStat.Text = "Beli: "..data.Beli.Value
+
+end)
 
 end
 
