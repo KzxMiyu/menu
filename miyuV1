@@ -1,0 +1,195 @@
+-- 🌸 MIYU HUB V4 🌸
+local TweenService = game:GetService("TweenService")
+local UIS = game:GetService("UserInputService")
+
+-- SCREEN GUI
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "MiyuHub"
+ScreenGui.Parent = game.CoreGui
+
+------------------------------------------------
+-- LOADING SCREEN
+------------------------------------------------
+
+local Loading = Instance.new("Frame")
+Loading.Parent = ScreenGui
+Loading.Size = UDim2.new(1,0,1,0)
+Loading.BackgroundColor3 = Color3.fromRGB(20,20,25)
+
+local LoadingText = Instance.new("TextLabel")
+LoadingText.Parent = Loading
+LoadingText.Size = UDim2.new(1,0,1,0)
+LoadingText.Text = "🌸 Miyu Hub Loading..."
+LoadingText.TextScaled = true
+LoadingText.TextColor3 = Color3.new(1,1,1)
+LoadingText.BackgroundTransparency = 1
+LoadingText.Font = Enum.Font.GothamBold
+
+task.wait(2)
+
+Loading:Destroy()
+
+------------------------------------------------
+-- MAIN MENU
+------------------------------------------------
+
+local Main = Instance.new("Frame")
+Main.Parent = ScreenGui
+Main.Size = UDim2.new(0,0,0,0)
+Main.Position = UDim2.new(0.5,-260,0.5,-180)
+Main.BackgroundColor3 = Color3.fromRGB(35,35,45)
+
+local Corner = Instance.new("UICorner")
+Corner.Parent = Main
+Corner.CornerRadius = UDim.new(0,12)
+
+local Stroke = Instance.new("UIStroke")
+Stroke.Parent = Main
+Stroke.Color = Color3.fromRGB(255,120,200)
+Stroke.Thickness = 2
+
+TweenService:Create(
+Main,
+TweenInfo.new(0.5,Enum.EasingStyle.Back),
+{Size = UDim2.new(0,520,0,360)}
+):Play()
+
+------------------------------------------------
+-- TOP BAR
+------------------------------------------------
+
+local TopBar = Instance.new("Frame")
+TopBar.Parent = Main
+TopBar.Size = UDim2.new(1,0,0,40)
+TopBar.BackgroundColor3 = Color3.fromRGB(255,120,200)
+
+local Title = Instance.new("TextLabel")
+Title.Parent = TopBar
+Title.Size = UDim2.new(1,0,1,0)
+Title.BackgroundTransparency = 1
+Title.Text = "🌸 Miyu Hub 🌸"
+Title.TextScaled = true
+Title.TextColor3 = Color3.new(1,1,1)
+Title.Font = Enum.Font.GothamBold
+
+------------------------------------------------
+-- DRAGGABLE
+------------------------------------------------
+
+local dragging = false
+local dragInput, dragStart, startPos
+
+TopBar.InputBegan:Connect(function(input)
+if input.UserInputType == Enum.UserInputType.MouseButton1 then
+dragging = true
+dragStart = input.Position
+startPos = Main.Position
+end
+end)
+
+UIS.InputChanged:Connect(function(input)
+if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+local delta = input.Position - dragStart
+Main.Position = UDim2.new(
+startPos.X.Scale,
+startPos.X.Offset + delta.X,
+startPos.Y.Scale,
+startPos.Y.Offset + delta.Y
+)
+end
+end)
+
+------------------------------------------------
+-- TAB BUTTONS
+------------------------------------------------
+
+local TabFrame = Instance.new("Frame")
+TabFrame.Parent = Main
+TabFrame.Size = UDim2.new(0,120,1,-40)
+TabFrame.Position = UDim2.new(0,0,0,40)
+TabFrame.BackgroundColor3 = Color3.fromRGB(40,40,55)
+
+local function CreateTab(name,pos)
+local btn = Instance.new("TextButton")
+btn.Parent = TabFrame
+btn.Size = UDim2.new(1,0,0,40)
+btn.Position = UDim2.new(0,0,0,pos)
+btn.Text = name
+btn.BackgroundColor3 = Color3.fromRGB(255,182,193)
+btn.TextColor3 = Color3.new(1,1,1)
+btn.Font = Enum.Font.GothamBold
+btn.TextScaled = true
+
+local c = Instance.new("UICorner")
+c.Parent = btn
+c.CornerRadius = UDim.new(0,8)
+
+btn.MouseEnter:Connect(function()
+TweenService:Create(btn,TweenInfo.new(0.2),{
+BackgroundColor3 = Color3.fromRGB(255,120,200)
+}):Play()
+end)
+
+btn.MouseLeave:Connect(function()
+TweenService:Create(btn,TweenInfo.new(0.2),{
+BackgroundColor3 = Color3.fromRGB(255,182,193)
+}):Play()
+end)
+
+return btn
+end
+
+local FarmTab = CreateTab("Farm",0)
+local BossTab = CreateTab("Boss",50)
+local TpTab = CreateTab("Teleport",100)
+
+------------------------------------------------
+-- CONTENT AREA
+------------------------------------------------
+
+local Content = Instance.new("Frame")
+Content.Parent = Main
+Content.Size = UDim2.new(1,-120,1,-40)
+Content.Position = UDim2.new(0,120,0,40)
+Content.BackgroundTransparency = 1
+
+------------------------------------------------
+-- PARTICLE EFFECT
+------------------------------------------------
+
+local Particle = Instance.new("ParticleEmitter")
+Particle.Parent = Main
+Particle.Texture = "rbxassetid://243660364"
+Particle.Rate = 5
+Particle.Lifetime = NumberRange.new(1)
+Particle.Speed = NumberRange.new(1)
+Particle.Color = ColorSequence.new(Color3.fromRGB(255,120,200))
+Particle.Size = NumberSequence.new(0.2)
+
+------------------------------------------------
+-- MENU TOGGLE BUTTON
+------------------------------------------------
+
+local Toggle = Instance.new("TextButton")
+Toggle.Parent = ScreenGui
+Toggle.Size = UDim2.new(0,120,0,40)
+Toggle.Position = UDim2.new(0,20,0.5,0)
+Toggle.Text = "Miyu"
+Toggle.BackgroundColor3 = Color3.fromRGB(255,120,200)
+Toggle.TextColor3 = Color3.new(1,1,1)
+Toggle.Font = Enum.Font.GothamBold
+Toggle.TextScaled = true
+
+local open = true
+
+Toggle.MouseButton1Click:Connect(function()
+
+open = not open
+
+if open then
+Main.Visible = true
+else
+Main.Visible = false
+end
+
+end)
