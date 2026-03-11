@@ -1,33 +1,23 @@
--- 🌸 MIYU HUB V4 🌸
-local TweenService = game:GetService("TweenService")
-local UIS = game:GetService("UserInputService")
+-- 🌸 MIYU HUB V5 VIP 🌸
 
+local TweenService = game:GetService("TweenService")
+local Lighting = game:GetService("Lighting")
+
+------------------------------------------------
 -- SCREEN GUI
+------------------------------------------------
+
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "MiyuHub"
 ScreenGui.Parent = game.CoreGui
 
 ------------------------------------------------
--- LOADING SCREEN
+-- BLUR EFFECT (VIP STYLE)
 ------------------------------------------------
 
-local Loading = Instance.new("Frame")
-Loading.Parent = ScreenGui
-Loading.Size = UDim2.new(1,0,1,0)
-Loading.BackgroundColor3 = Color3.fromRGB(20,20,25)
-
-local LoadingText = Instance.new("TextLabel")
-LoadingText.Parent = Loading
-LoadingText.Size = UDim2.new(1,0,1,0)
-LoadingText.Text = "🌸 Miyu Hub Loading..."
-LoadingText.TextScaled = true
-LoadingText.TextColor3 = Color3.new(1,1,1)
-LoadingText.BackgroundTransparency = 1
-LoadingText.Font = Enum.Font.GothamBold
-
-task.wait(2)
-
-Loading:Destroy()
+local blur = Instance.new("BlurEffect")
+blur.Size = 18
+blur.Parent = Lighting
 
 ------------------------------------------------
 -- MAIN MENU
@@ -35,9 +25,10 @@ Loading:Destroy()
 
 local Main = Instance.new("Frame")
 Main.Parent = ScreenGui
-Main.Size = UDim2.new(0,0,0,0)
+Main.Size = UDim2.new(0,520,0,360)
 Main.Position = UDim2.new(0.5,-260,0.5,-180)
 Main.BackgroundColor3 = Color3.fromRGB(35,35,45)
+Main.BackgroundTransparency = 0.25
 
 local Corner = Instance.new("UICorner")
 Corner.Parent = Main
@@ -47,12 +38,6 @@ local Stroke = Instance.new("UIStroke")
 Stroke.Parent = Main
 Stroke.Color = Color3.fromRGB(255,120,200)
 Stroke.Thickness = 2
-
-TweenService:Create(
-Main,
-TweenInfo.new(0.5,Enum.EasingStyle.Back),
-{Size = UDim2.new(0,520,0,360)}
-):Play()
 
 ------------------------------------------------
 -- TOP BAR
@@ -66,130 +51,99 @@ TopBar.BackgroundColor3 = Color3.fromRGB(255,120,200)
 local Title = Instance.new("TextLabel")
 Title.Parent = TopBar
 Title.Size = UDim2.new(1,0,1,0)
-Title.BackgroundTransparency = 1
 Title.Text = "🌸 Miyu Hub 🌸"
+Title.BackgroundTransparency = 1
 Title.TextScaled = true
-Title.TextColor3 = Color3.new(1,1,1)
 Title.Font = Enum.Font.GothamBold
+Title.TextColor3 = Color3.new(1,1,1)
 
 ------------------------------------------------
--- DRAGGABLE
+-- ANIME LOGO
 ------------------------------------------------
 
-local dragging = false
-local dragInput, dragStart, startPos
-
-TopBar.InputBegan:Connect(function(input)
-if input.UserInputType == Enum.UserInputType.MouseButton1 then
-dragging = true
-dragStart = input.Position
-startPos = Main.Position
-end
-end)
-
-UIS.InputChanged:Connect(function(input)
-if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-local delta = input.Position - dragStart
-Main.Position = UDim2.new(
-startPos.X.Scale,
-startPos.X.Offset + delta.X,
-startPos.Y.Scale,
-startPos.Y.Offset + delta.Y
-)
-end
-end)
+local Logo = Instance.new("ImageLabel")
+Logo.Parent = Main
+Logo.Size = UDim2.new(0,80,0,80)
+Logo.Position = UDim2.new(0,10,0,50)
+Logo.BackgroundTransparency = 1
+Logo.Image = "rbxassetid://96179046857812"
 
 ------------------------------------------------
--- TAB BUTTONS
+-- MOVING BACKGROUND EFFECT
 ------------------------------------------------
 
-local TabFrame = Instance.new("Frame")
-TabFrame.Parent = Main
-TabFrame.Size = UDim2.new(0,120,1,-40)
-TabFrame.Position = UDim2.new(0,0,0,40)
-TabFrame.BackgroundColor3 = Color3.fromRGB(40,40,55)
-
-local function CreateTab(name,pos)
-local btn = Instance.new("TextButton")
-btn.Parent = TabFrame
-btn.Size = UDim2.new(1,0,0,40)
-btn.Position = UDim2.new(0,0,0,pos)
-btn.Text = name
-btn.BackgroundColor3 = Color3.fromRGB(255,182,193)
-btn.TextColor3 = Color3.new(1,1,1)
-btn.Font = Enum.Font.GothamBold
-btn.TextScaled = true
-
-local c = Instance.new("UICorner")
-c.Parent = btn
-c.CornerRadius = UDim.new(0,8)
-
-btn.MouseEnter:Connect(function()
-TweenService:Create(btn,TweenInfo.new(0.2),{
-BackgroundColor3 = Color3.fromRGB(255,120,200)
-}):Play()
-end)
-
-btn.MouseLeave:Connect(function()
-TweenService:Create(btn,TweenInfo.new(0.2),{
-BackgroundColor3 = Color3.fromRGB(255,182,193)
-}):Play()
-end)
-
-return btn
-end
-
-local FarmTab = CreateTab("Farm",0)
-local BossTab = CreateTab("Boss",50)
-local TpTab = CreateTab("Teleport",100)
-
-------------------------------------------------
--- CONTENT AREA
-------------------------------------------------
-
-local Content = Instance.new("Frame")
-Content.Parent = Main
-Content.Size = UDim2.new(1,-120,1,-40)
-Content.Position = UDim2.new(0,120,0,40)
-Content.BackgroundTransparency = 1
-
-------------------------------------------------
--- PARTICLE EFFECT
-------------------------------------------------
+local Bg = Instance.new("Frame")
+Bg.Parent = Main
+Bg.Size = UDim2.new(1,0,1,0)
+Bg.BackgroundTransparency = 1
 
 local Particle = Instance.new("ParticleEmitter")
-Particle.Parent = Main
+Particle.Parent = Bg
 Particle.Texture = "rbxassetid://243660364"
-Particle.Rate = 5
-Particle.Lifetime = NumberRange.new(1)
+Particle.Rate = 6
+Particle.Lifetime = NumberRange.new(2)
 Particle.Speed = NumberRange.new(1)
 Particle.Color = ColorSequence.new(Color3.fromRGB(255,120,200))
-Particle.Size = NumberSequence.new(0.2)
+Particle.Size = NumberSequence.new(0.25)
 
 ------------------------------------------------
--- MENU TOGGLE BUTTON
+-- AUTO FARM BUTTON
 ------------------------------------------------
 
-local Toggle = Instance.new("TextButton")
-Toggle.Parent = ScreenGui
-Toggle.Size = UDim2.new(0,120,0,40)
-Toggle.Position = UDim2.new(0,20,0.5,0)
-Toggle.Text = "Miyu"
-Toggle.BackgroundColor3 = Color3.fromRGB(255,120,200)
-Toggle.TextColor3 = Color3.new(1,1,1)
-Toggle.Font = Enum.Font.GothamBold
-Toggle.TextScaled = true
+local AutoFarm = false
 
-local open = true
+local FarmButton = Instance.new("TextButton")
+FarmButton.Parent = Main
+FarmButton.Size = UDim2.new(0,200,0,50)
+FarmButton.Position = UDim2.new(0.5,-100,0.55,0)
+FarmButton.Text = "Auto Farm"
+FarmButton.BackgroundColor3 = Color3.fromRGB(255,182,193)
+FarmButton.TextColor3 = Color3.new(1,1,1)
+FarmButton.TextScaled = true
+FarmButton.Font = Enum.Font.GothamBold
 
-Toggle.MouseButton1Click:Connect(function()
+FarmButton.MouseButton1Click:Connect(function()
 
-open = not open
+AutoFarm = not AutoFarm
 
-if open then
-Main.Visible = true
-else
-Main.Visible = false
+FarmButton.Text = AutoFarm and "Auto Farm: ON" or "Auto Farm: OFF"
+
+while AutoFarm do
+task.wait()
+
+-- bạn có thể thêm code farm mob ở đây
+
+end
+
+end)
+
+------------------------------------------------
+-- AUTO BOSS BUTTON
+------------------------------------------------
+
+local AutoBoss = false
+
+local BossButton = Instance.new("TextButton")
+BossButton.Parent = Main
+BossButton.Size = UDim2.new(0,200,0,50)
+BossButton.Position = UDim2.new(0.5,-100,0.75,0)
+BossButton.Text = "Auto Boss"
+BossButton.BackgroundColor3 = Color3.fromRGB(255,182,193)
+BossButton.TextColor3 = Color3.new(1,1,1)
+BossButton.TextScaled = true
+BossButton.Font = Enum.Font.GothamBold
+
+BossButton.MouseButton1Click:Connect(function()
+
+AutoBoss = not AutoBoss
+
+BossButton.Text = AutoBoss and "Auto Boss: ON" or "Auto Boss: OFF"
+
+while AutoBoss do
+task.wait()
+
+-- thêm code đánh boss ở đây
+
 end
 
 end)
