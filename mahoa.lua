@@ -1,10 +1,3 @@
---[[
-    ╔══════════════════════════════════════╗
-    ║     FRUITS MENU SCRIPT v2.0          ║
-    ║     Chỉ dùng cho mục đích học tập   ║
-    ╚══════════════════════════════════════╝
-]]
-
 -- ===================== SERVICES =====================
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
