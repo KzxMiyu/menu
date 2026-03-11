@@ -1,12 +1,13 @@
 -- 🌸 MIYU MENU (CHỈ GUI) 🌸
 
-local TweenService = game:GetService("TweenService")
-local UIS = game:GetService("UserInputService")
-local player = game.Players.LocalPlayer
 
-local gui = Instance.new("ScreenGui")
-gui.Name = "MiyuMenu"
-gui.Parent = player:WaitForChild("PlayerGui")
+
+
+Settings = Settings or {}
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local HttpService = game:GetService("HttpService")
 
 -- Toggle Button
 local Toggle = Instance.new("TextButton")
@@ -80,11 +81,6 @@ Toggle.MouseButton1Click:Connect(function()
 open = not open
 Main.Visible = open
 end)
-Settings = Settings or {}
-
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local HttpService = game:GetService("HttpService")
 
 local Plr = Players.LocalPlayer
 
