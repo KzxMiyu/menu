@@ -1,86 +1,8 @@
--- 🌸 MIYU MENU (CHỈ GUI) 🌸
-
-
-
-
 Settings = Settings or {}
 
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local HttpService = game:GetService("HttpService")
-
--- Toggle Button
-local Toggle = Instance.new("TextButton")
-Toggle.Parent = gui
-Toggle.Size = UDim2.new(0,120,0,40)
-Toggle.Position = UDim2.new(0,20,0.5,0)
-Toggle.Text = "🌸 Miyu"
-Toggle.BackgroundColor3 = Color3.fromRGB(255,120,200)
-Toggle.TextColor3 = Color3.new(1,1,1)
-Toggle.TextScaled = true
-Toggle.Font = Enum.Font.GothamBold
-Instance.new("UICorner",Toggle)
-
--- Main Menu
-local Main = Instance.new("Frame")
-Main.Parent = gui
-Main.Size = UDim2.new(0,0,0,0)
-Main.Position = UDim2.new(0.5,-220,0.5,-150)
-Main.BackgroundColor3 = Color3.fromRGB(255,182,193)
-Instance.new("UICorner",Main)
-
-TweenService:Create(
-Main,
-TweenInfo.new(0.5,Enum.EasingStyle.Back),
-{Size = UDim2.new(0,420,0,280)}
-):Play()
-
--- Top bar
-local TopBar = Instance.new("Frame")
-TopBar.Parent = Main
-TopBar.Size = UDim2.new(1,0,0,40)
-TopBar.BackgroundColor3 = Color3.fromRGB(255,120,200)
-
-local Title = Instance.new("TextLabel")
-Title.Parent = TopBar
-Title.Size = UDim2.new(1,0,1,0)
-Title.BackgroundTransparency = 1
-Title.Text = "🌸 Miyu Hub 🌸"
-Title.TextScaled = true
-Title.Font = Enum.Font.GothamBold
-Title.TextColor3 = Color3.new(1,1,1)
-
--- Drag system
-local dragging=false
-local dragStart
-local startPos
-
-TopBar.InputBegan:Connect(function(input)
-if input.UserInputType==Enum.UserInputType.MouseButton1 then
-dragging=true
-dragStart=input.Position
-startPos=Main.Position
-end
-end)
-
-UIS.InputChanged:Connect(function(input)
-if dragging and input.UserInputType==Enum.UserInputType.MouseMovement then
-local delta=input.Position-dragStart
-Main.Position=UDim2.new(
-startPos.X.Scale,
-startPos.X.Offset+delta.X,
-startPos.Y.Scale,
-startPos.Y.Offset+delta.Y
-)
-end
-end)
-
--- Toggle menu
-local open=true
-Toggle.MouseButton1Click:Connect(function()
-open = not open
-Main.Visible = open
-end)
 
 local Plr = Players.LocalPlayer
 
